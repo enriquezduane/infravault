@@ -1,14 +1,12 @@
-import express, { Request, Response } from 'express';
+const express = require('express');
 
 const app = express();
-const port: number = 3000;
+const port = 3000;
 
-// Keep backend routes simple - no /api prefix needed
-app.get('/', (req: Request, res: Response) => {
-    res.send('wassup nigger');
+app.get('/api', (req, res) => {
+    res.send('this is from the api');
 });
 
 app.listen(port, () => {
     console.log(`App listening on port ${port}`);
 });
-

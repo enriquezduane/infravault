@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.ts",
   "scripts": {
-    "dev": "ts-node --watch app.ts"
+    "dev": "node app.ts"
   },
   "keywords": [],
   "author": "",
