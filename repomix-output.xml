@@ -1,0 +1,496 @@
+This file is a merged representation of the entire codebase, combined into a single document by Repomix.
+
+<file_summary>
+This section contains a summary of this file.
+
+<purpose>
+This file contains a packed representation of the entire repository's contents.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+</purpose>
+
+<file_format>
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Repository files (if enabled)
+5. Multiple file entries, each consisting of:
+  - File path as an attribute
+  - Full contents of the file
+</file_format>
+
+<usage_guidelines>
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+
+- Pay special attention to the Repository Instruction. These contain important context and guidelines specific to this project.
+</usage_guidelines>
+
+<notes>
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+- Files are sorted by Git change count (files with more changes are at the bottom)
+</notes>
+
+</file_summary>
+
+<directory_structure>
+frontend/
+  src/
+    App.tsx
+    main.tsx
+    vite-env.d.ts
+  .gitignore
+  eslint.config.js
+  index.html
+  package.json
+  README.md
+  tsconfig.app.json
+  tsconfig.json
+  tsconfig.node.json
+  vite.config.ts
+README.md
+</directory_structure>
+
+<files>
+This section contains the contents of the repository's files.
+
+<file path="frontend/.gitignore">
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+</file>
+
+<file path="frontend/src/vite-env.d.ts">
+/// <reference types="vite/client" />
+</file>
+
+<file path="frontend/eslint.config.js">
+import js from '@eslint/js'
+import globals from 'globals'
+import reactHooks from 'eslint-plugin-react-hooks'
+import reactRefresh from 'eslint-plugin-react-refresh'
+import tseslint from 'typescript-eslint'
+import { globalIgnores } from 'eslint/config'
+
+export default tseslint.config([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      js.configs.recommended,
+      tseslint.configs.recommended,
+      reactHooks.configs['recommended-latest'],
+      reactRefresh.configs.vite,
+    ],
+    languageOptions: {
+      ecmaVersion: 2020,
+      globals: globals.browser,
+    },
+  },
+])
+</file>
+
+<file path="frontend/package.json">
+{
+  "name": "frontend",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.33.0",
+    "@types/react": "^19.1.10",
+    "@types/react-dom": "^19.1.7",
+    "@vitejs/plugin-react": "^5.0.0",
+    "eslint": "^9.33.0",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.20",
+    "globals": "^16.3.0",
+    "typescript": "~5.8.3",
+    "typescript-eslint": "^8.39.1",
+    "vite": "^7.1.2"
+  }
+}
+</file>
+
+<file path="frontend/README.md">
+# React + TypeScript + Vite
+
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+
+Currently, two official plugins are available:
+
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+## Expanding the ESLint configuration
+
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+
+```js
+export default tseslint.config([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+
+      // Remove tseslint.configs.recommended and replace with this
+      ...tseslint.configs.recommendedTypeChecked,
+      // Alternatively, use this for stricter rules
+      ...tseslint.configs.strictTypeChecked,
+      // Optionally, add this for stylistic rules
+      ...tseslint.configs.stylisticTypeChecked,
+
+      // Other configs...
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```
+
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
+
+export default tseslint.config([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+      // Enable lint rules for React
+      reactX.configs['recommended-typescript'],
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```
+</file>
+
+<file path="frontend/tsconfig.app.json">
+{
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+    "target": "ES2022",
+    "useDefineForClassFields": true,
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+    "jsx": "react-jsx",
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "erasableSyntaxOnly": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedSideEffectImports": true
+  },
+  "include": ["src"]
+}
+</file>
+
+<file path="frontend/tsconfig.json">
+{
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ]
+}
+</file>
+
+<file path="frontend/tsconfig.node.json">
+{
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
+    "target": "ES2023",
+    "lib": ["ES2023"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "erasableSyntaxOnly": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedSideEffectImports": true
+  },
+  "include": ["vite.config.ts"]
+}
+</file>
+
+<file path="frontend/src/main.tsx">
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import App from './App.tsx'
+
+createRoot(document.getElementById('root')!).render(
+  <StrictMode>
+    <App />
+  </StrictMode>,
+)
+</file>
+
+<file path="frontend/index.html">
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/webp" href="/icon.webp" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>InfraVault</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+</file>
+
+<file path="frontend/vite.config.ts">
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+// https://vite.dev/config/
+export default defineConfig({
+  plugins: [react()],
+})
+</file>
+
+<file path="README.md">
+### InfraVault
+
+#### Details
+
+To build a secure, self-hosted, multi-user image vault by architecting a resilient, scalable, and highly automated infrastructure. The project will demonstrate mastery over the entire lifecycle of a modern distributed application, from initial deployment and CI/CD to production-grade monitoring and security.
+
+This project will be guided by the following architectural principles:
+
+*   **Automation First:** All infrastructure provisioning, configuration, and application deployment will be automated and defined as code. Manual intervention will be eliminated wherever possible.
+*   **Design for Failure:** The system will be architected to be resilient. The failure of any single component should not result in a total system outage.
+*   **Security by Design:** Security is not an afterthought. Secure practices for data, access, and secrets management will be integrated at every stage.
+*   **Measurability is Key:** The system's health, performance, and status will be centrally monitored and visualized, enabling proactive maintenance and data-driven decisions.
+
+#### Features
+
+*   **Authentication:** Users can register and log in securely via their Google account (OAuth 2.0).
+*   **Image Upload:** Authenticated users can upload image files, providing a mandatory title and optional description.
+*   **Personal Gallery:** Users can view, manage, and delete their own uploaded images.
+*   **Public Gallery:** All users can view a gallery of all images uploaded by all users.
+
+#### Architectural Roadmap
+
+This project is divided into four distinct phases, each building upon the last.
+
+---
+
+##### **Phase 1: The Monolithic Foundation (MVP)**
+*Goal: Establish a working, containerized application on a single Linux server.*
+
+*   **Architecture:** A single Virtual Private Server (VPS) running multiple Docker containers managed by Docker Compose. Nginx acts as a reverse proxy, directing traffic to the backend API and serving the frontend application.
+*   **Components & Technology:**
+    *   **Containerization:** Docker & Docker Compose
+    *   **Reverse Proxy:** Nginx
+    *   **Backend API:** Go
+    *   **Database:** PostgreSQL
+    *   **File Storage:** MinIO
+    *   **Frontend:** React
+    *   **Host OS:** Linux (e.g., Ubuntu 22.04 LTS)
+    *   **Security:** HTTPS via Let's Encrypt (managed by Certbot)
+    *   **Domain:** Duck DNS (Free)
+*   **Deployment Method:** Manual Git pull followed by shell scripts executed over SSH.
+*   **Monitoring Method:** Standard Linux tools (`journalctl`, `docker logs`, `htop`, `df`, `du`).
+
+---
+
+##### **Phase 2: Automation & Repeatability (CI/CD & IaC)**
+*Goal: Fully automate the provisioning of infrastructure and the deployment of the application.*
+
+*   **Architecture:** The application remains on a single VPS, but the server itself is now provisioned and configured automatically. Application updates are deployed via a CI/CD pipeline.
+*   **Evolution of Components & Technology:**
+    *   **Infrastructure Provisioning:** **Terraform** will be used to create the VPS and necessary cloud resources (e.g., firewall rules, DNS records) on a cloud provider like AWS, Google Cloud, or DigitalOcean.
+    *   **Configuration Management:** **Ansible** will be used to configure the provisioned VPS, installing Docker, Docker Compose, and other required packages.
+    *   **CI/CD Pipeline:** **GitHub Actions** will manage the entire build-to-deploy workflow.
+        *   **Trigger:** On push to `main` branch.
+        *   **Jobs:**
+            1.  **Test:** Lint and run unit tests for the Go API and React frontend.
+            2.  **Build & Push:** Build production-ready Docker images for the API and frontend. Push images to a container registry (**Docker Hub** or **GitHub Container Registry**).
+            3.  **Deploy:** Securely SSH into the target server and execute a script to pull the new images and restart the Docker Compose stack.
+    *   **Deployment Method:** Fully automated via GitHub Actions.
+
+---
+
+##### **Phase 3: High Availability & Scalability (Distributed Systems)**
+*Goal: Evolve the single-server architecture into a resilient, multi-node cluster that can tolerate failures.*
+
+*   **Architecture:** The application is migrated from Docker Compose to a lightweight Kubernetes cluster spanning 2-3 VPS nodes. Services are replicated for redundancy.
+*   **Evolution of Components & Technology:**
+    *   **Container Orchestration:** **K3s** will be used to create a multi-node Kubernetes cluster. Docker Compose is replaced by Kubernetes manifest files (YAML for Deployments, Services, Ingress, etc.).
+    *   **High Availability - API:** The Go backend will be deployed as a Kubernetes `Deployment` with at least 2 replicas, ensuring the API remains available if one node fails.
+    *   **High Availability - Database:** **PostgreSQL** will be configured in a primary-replica streaming replication setup using a Kubernetes `StatefulSet`.
+    *   **High Availability - File Storage:** **MinIO** will be deployed in its distributed mode across multiple cluster nodes, providing data redundancy for uploaded images.
+    *   **Load Balancing:** A Kubernetes **Ingress Controller** (e.g., Traefik, built into K3s) will replace the standalone Nginx proxy to manage external traffic and load balance requests across the API replicas.
+
+---
+
+##### **Phase 4: Production-Grade Observability & Security**
+*Goal: Implement a comprehensive monitoring, logging, and security solution for the entire distributed system.*
+
+*   **Architecture:** A centralized "observability stack" is deployed within the Kubernetes cluster to collect data from all components. Secrets management is hardened.
+*   **Evolution of Components & Technology:**
+    *   **Metrics Collection & Visualization:**
+        *   **Prometheus:** Deployed to scrape metrics from all cluster nodes and application services.
+        *   **Grafana:** Deployed to create dashboards for visualizing key health and performance metrics (CPU/memory usage, API latency, database connections, etc.).
+    *   **Alerting:** **Alertmanager** (part of the Prometheus ecosystem) will be configured to send alerts (e.g., via email or Slack) based on predefined rules (e.g., service down, high error rate).
+    *   **Centralized Logging:** The **Loki Stack** will be deployed.
+        *   **Promtail:** Collects logs from all containers in the cluster.
+        *   **Loki:** Aggregates and stores log streams efficiently.
+        *   Logs will be searchable and viewable within **Grafana**.
+    *   **Secrets Management:** **HashiCorp Vault** or Kubernetes Secrets will be used to securely store and inject sensitive data (database passwords, API keys, OAuth credentials) into application pods at runtime.
+    *   **Container Security:** **Trivy** will be added to the CI/CD pipeline to automatically scan Docker images for known vulnerabilities before they are deployed.
+
+#### **5.0 Final Technology Stack Summary**
+
+| Category                  | Technology                                     |
+| ------------------------- | ---------------------------------------------- |
+| **Cloud & Provisioning**  | Any IaaS Provider (AWS, GCP, etc.), Terraform  |
+| **Configuration Mgmt**    | Ansible                                        |
+| **Orchestration**         | K3s (Kubernetes)                               |
+| **CI/CD**                 | GitHub Actions, Docker Hub / GHCR              |
+| **Containerization**      | Docker                                         |
+| **Ingress & Proxy**       | K3s's built-in Traefik Ingress Controller      |
+| **Backend API**           | Go                                             |
+| **Frontend**              | React                                          |
+| **Database**              | PostgreSQL (with streaming replication)        |
+| **Object Storage**        | MinIO (in distributed mode)                    |
+| **Monitoring & Metrics**  | Prometheus, Grafana, Alertmanager            |
+| **Logging**               | Loki, Promtail                                 |
+| **Security**              | Let's Encrypt, HashiCorp Vault, Trivy          |
+
+#### **6.0 Portfolio Outcomes & Key Learning Objectives**
+
+Upon completion, this project will demonstrate:
+
+*   **End-to-End Application Lifecycle Management:** From code commit to a fully monitored, production-grade deployment.
+*   **Infrastructure as Code (IaC):** Proficiency in provisioning and managing cloud infrastructure declaratively using Terraform and Ansible.
+*   **Advanced CI/CD:** The ability to design and implement automated testing and deployment pipelines.
+*   **Container Orchestration:** Deep, practical experience with Kubernetes for deploying and managing distributed applications.
+*   **Distributed System Design:** An understanding of high availability, data redundancy, and load balancing principles.
+*   **Comprehensive Observability:** Expertise in setting up and using modern monitoring and logging stacks (Prometheus, Grafana, Loki).
+*   **DevSecOps Practices:** Competency in integrating security tooling for vulnerability scanning and secrets management.
+</file>
+
+<file path="frontend/src/App.tsx">
+function App() {
+  return (
+    <>
+    <h1>Hello WORLD</h1>
+    </>
+  )
+}
+
+export default App
+</file>
+
+</files>
+
+
+<instruction>
+# Core Principle: I am a beginner.
+My primary goal is to understand fundamental concepts and get my code working. Please prioritize clarity, simplicity, and direct solutions over complex, "production-ready" code. Assume I am not yet familiar with advanced topics.
+
+# Response Structure (Please follow this order):
+
+The Simple, Working Solution First:
+Start immediately with the simplest possible code block that solves my problem. This helps me see the core logic right away.
+Clear, Actionable Steps:
+Tell me exactly which file to modify.
+Use a clear "replace/add/delete" format. For example:
+"In your_file.py, replace the block of code in your_file.py:"
+"With this new code:"
+[New code]
+NOTE: For the new code, make sure to add inline comments of the modifications you've done so it's easy to find
+The "Why" Explained Simply:
+After the code, explain why the changes work. Explain any new functions or syntax you've introduced. Please avoid jargon, or if you must use a technical term, explain it immediately in simple terms (e.g., "This is called a 'list comprehension,' which is just a shorter way to create a list.").
+Optional: "Best Practice / Next Level" Section:
+This is crucial. After the main solution and explanation, create a separate, clearly labeled section called "Optional Best Practice" or "A Good Habit to Learn."
+In this section, you can introduce concepts like error handling (try...except blocks), breaking code into functions, or improving efficiency.
+Frame this as a valuable next step for my learning, not a mandatory part of the solution. This allows me to focus on the core problem first and learn the best practices at my own pace.
+# Specific Guidelines:
+
+One Concept at a Time: If the solution requires multiple new ideas, please focus on the most critical one in the main explanation. Introduce secondary concepts in the "Optional Best Practice" section.
+Hold Off on Splitting Files: Only suggest splitting code into smaller files if my starting code is already very long (e.g., over 50 lines) or has multiple distinct responsibilities. When you do, explain the simple organizational benefit (e.g., "This makes it easier to find things later.").
+
+</instruction>
